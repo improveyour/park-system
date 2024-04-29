@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.parkingHistory.mapper.ParkingRecordInfoMapper">
+
+    <resultMap type="ParkingRecordInfo" id="ParkingRecordInfoResult">
+        <result property="id" column="id"/>
+        <result property="pay" column="pay"/>
+        <result property="positions" column="positions"/>
+        <result property="parkingTime" column="parking_time"/>
+        <result property="leaveTime" column="leave_time"/>
+        <result property="carPlate" column="car_plate"/>
+        <result property="parkingId" column="parking_id"/>
+        <result property="payTime" column="pay_time"/>
+    </resultMap>
+
+    <sql id="selectParkingRecordInfoVo">
+        select id,
+               pay,
+               positions,
+               parking_time,
+               leave_time,
+               car_plate,
+               parking_id,
+               pay_time
+        from parking_record_info
+    </sql>
+
+    <select id="selectParkingRecordInfoList" parameterType="ParkingRecordInfo" resultMap="ParkingRecordInfoResult">
+        <include refid="selectParkingRecordInfoVo"/>
+        <where>
+            <if test="pay != null ">and pay = #{pay}</if>
+            <if test="positions != null  and positions != ''">and positions = #{positions}</if>
+            <if test="parkingTime != null ">and parking_time = #{parkingTime}</if>
+            <if test="leaveTime != null ">and leave_time = #{leaveTime}</if>
+            <if test="carPlate != null  and carPlate != ''">and car_plate = #{carPlate}</if>
+            <if test="parkingId != null  and parkingId != ''">and parking_id = #{parkingId}</if>
+            <if test="payTime != null ">and pay_time = #{payTime}</if>
+        </where>
+    </select>
+
+    <select id="selectParkingRecordInfoById" parameterType="Long" resultMap="ParkingRecordInfoResult">
+        <include refid="selectParkingRecordInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertParkingRecordInfo" parameterType="ParkingRecordInfo">
+        insert into parking_record_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="pay != null">pay,</if>
+            <if test="positions != null and positions != ''">positions,</if>
+            <if test="parkingTime != null">parking_time,</if>
+            <if test="leaveTime != null">leave_time,</if>
+            <if test="carPlate != null and carPlate != ''">car_plate,</if>
+            <if test="parkingId != null and parkingId != ''">parking_id,</if>
+            <if test="payTime != null">pay_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="pay != null">#{pay},</if>
+            <if test="positions != null and positions != ''">#{positions},</if>
+            <if test="parkingTime != null">#{parkingTime},</if>
+            <if test="leaveTime != null">#{leaveTime},</if>
+            <if test="carPlate != null and carPlate != ''">#{carPlate},</if>
+            <if test="parkingId != null and parkingId != ''">#{parkingId},</if>
+            <if test="payTime != null">#{payTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateParkingRecordInfo" parameterType="ParkingRecordInfo">
+        update parking_record_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pay != null">pay = #{pay},</if>
+            <if test="positions != null and positions != ''">positions = #{positions},</if>
+            <if test="parkingTime != null">parking_time = #{parkingTime},</if>
+            <if test="leaveTime != null">leave_time = #{leaveTime},</if>
+            <if test="carPlate != null and carPlate != ''">car_plate = #{carPlate},</if>
+            <if test="parkingId != null and parkingId != ''">parking_id = #{parkingId},</if>
+            <if test="payTime != null">pay_time = #{payTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteParkingRecordInfoById" parameterType="Long">
+        delete
+        from parking_record_info
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteParkingRecordInfoByIds" parameterType="String">
+        delete from parking_record_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

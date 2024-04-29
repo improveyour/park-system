@@ -1543,3 +1543,113 @@ values ('查询管理员导出', @parentId, '5', '#', 'F', '0', 'park:queryAdmin
         '');
 
 
+
+-- ----------------------------
+-- 查询历史停车记录表
+-- ----------------------------
+-- 菜单 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('查询停车记录', '2013', '1', '/park/parkingHistory', 'C', '0', 'park:parkingHistory:view', '#', 'admin',
+        sysdate(), '', null, '查询停车记录菜单');
+
+-- 按钮父菜单ID
+SELECT @parentId := LAST_INSERT_ID();
+
+-- 按钮 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('查询停车记录查询', @parentId, '1', '#', 'F', '0', 'park:parkingHistory:list', '#', 'admin', sysdate(), '',
+        null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('查询停车记录新增', @parentId, '2', '#', 'F', '0', 'park:parkingHistory:add', '#', 'admin', sysdate(), '', null,
+        '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('查询停车记录修改', @parentId, '3', '#', 'F', '0', 'park:parkingHistory:edit', '#', 'admin', sysdate(), '',
+        null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('查询停车记录删除', @parentId, '4', '#', 'F', '0', 'park:parkingHistory:remove', '#', 'admin', sysdate(), '',
+        null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('查询停车记录导出', @parentId, '5', '#', 'F', '0', 'park:parkingHistory:export', '#', 'admin', sysdate(), '',
+        null, '');
+
+
+-- ----------------------------
+-- 收费管理
+-- ----------------------------
+-- 菜单 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('收费标准', '2020', '1', '/park/parkingCost', 'C', '0', 'park:parkingCost:view', '#', 'admin', sysdate(), '',
+        null, '收费标准菜单');
+
+-- 按钮父菜单ID
+SELECT @parentId := LAST_INSERT_ID();
+
+-- 按钮 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('收费标准查询', @parentId, '1', '#', 'F', '0', 'park:parkingCost:list', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('收费标准新增', @parentId, '2', '#', 'F', '0', 'park:parkingCost:add', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('收费标准修改', @parentId, '3', '#', 'F', '0', 'park:parkingCost:edit', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('收费标准删除', @parentId, '4', '#', 'F', '0', 'park:parkingCost:remove', '#', 'admin', sysdate(), '', null,
+        '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('收费标准导出', @parentId, '5', '#', 'F', '0', 'park:parkingCost:export', '#', 'admin', sysdate(), '', null,
+        '');
+
+-- 菜单 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车位信息', '2027', '1', '/park/parkingInfo', 'C', '0', 'park:parkingInfo:view', '#', 'admin', sysdate(), '',
+        null, '车位信息菜单');
+
+
+-- ----------------------------
+-- 车位管理
+-- ----------------------------
+-- 按钮父菜单ID
+SELECT @parentId := LAST_INSERT_ID();
+
+-- 按钮 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车位信息查询', @parentId, '1', '#', 'F', '0', 'park:parkingInfo:list', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车位信息新增', @parentId, '2', '#', 'F', '0', 'park:parkingInfo:add', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车位信息修改', @parentId, '3', '#', 'F', '0', 'park:parkingInfo:edit', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车位信息删除', @parentId, '4', '#', 'F', '0', 'park:parkingInfo:remove', '#', 'admin', sysdate(), '', null,
+        '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车位信息导出', @parentId, '5', '#', 'F', '0', 'park:parkingInfo:export', '#', 'admin', sysdate(), '', null,
+        '');
