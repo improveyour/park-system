@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.parkingInfo.mapper.CarPlateInfoMapper">
+
+    <resultMap type="CarPlateInfo" id="CarPlateInfoResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="carPlate" column="car_plate"/>
+    </resultMap>
+
+    <sql id="selectCarPlateInfoVo">
+        select id, user_id, car_plate
+        from car_plate_info
+    </sql>
+
+    <select id="selectCarPlateInfoList" parameterType="CarPlateInfo" resultMap="CarPlateInfoResult">
+        <include refid="selectCarPlateInfoVo"/>
+        <where>
+            <if test="userId != null ">and user_id = #{userId}</if>
+            <if test="carPlate != null  and carPlate != ''">and car_plate = #{carPlate}</if>
+        </where>
+    </select>
+
+    <select id="selectCarPlateInfoById" parameterType="Long" resultMap="CarPlateInfoResult">
+        <include refid="selectCarPlateInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCarPlateInfo" parameterType="CarPlateInfo">
+        insert into car_plate_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="carPlate != null and carPlate != ''">car_plate,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="carPlate != null and carPlate != ''">#{carPlate},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCarPlateInfo" parameterType="CarPlateInfo">
+        update car_plate_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="carPlate != null and carPlate != ''">car_plate = #{carPlate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCarPlateInfoById" parameterType="Long">
+        delete
+        from car_plate_info
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteCarPlateInfoByIds" parameterType="String">
+        delete from car_plate_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

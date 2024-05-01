@@ -1653,3 +1653,37 @@ insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, 
                       update_by, update_time, remark)
 values ('车位信息导出', @parentId, '5', '#', 'F', '0', 'park:parkingInfo:export', '#', 'admin', sysdate(), '', null,
         '');
+
+
+-- ----------------------------
+-- 车牌信息管理
+-- ----------------------------
+-- 菜单 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车牌', '2013', '1', '/park/plateInfo', 'C', '0', 'park:plateInfo:view', '#', 'admin', sysdate(), '', null,
+        '车牌菜单');
+
+-- 按钮父菜单ID
+SELECT @parentId := LAST_INSERT_ID();
+
+-- 按钮 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车牌查询', @parentId, '1', '#', 'F', '0', 'park:plateInfo:list', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车牌新增', @parentId, '2', '#', 'F', '0', 'park:plateInfo:add', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车牌修改', @parentId, '3', '#', 'F', '0', 'park:plateInfo:edit', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车牌删除', @parentId, '4', '#', 'F', '0', 'park:plateInfo:remove', '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time,
+                      update_by, update_time, remark)
+values ('车牌导出', @parentId, '5', '#', 'F', '0', 'park:plateInfo:export', '#', 'admin', sysdate(), '', null, '');
