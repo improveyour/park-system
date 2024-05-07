@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * 车位信息Service业务层处理
@@ -19,6 +20,10 @@ import java.util.List;
 public class ParkingInfoServiceImpl implements IParkingInfoService {
     @Autowired
     private ParkingInfoMapper parkingInfoMapper;
+
+    // 用于标识车位是否被占用
+    // 这种写法并不合理，按道理应该要查数据库
+    private int flag[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     /**
      * 查询车位信息
@@ -84,5 +89,42 @@ public class ParkingInfoServiceImpl implements IParkingInfoService {
     @Override
     public int deleteParkingInfoById(Long id) {
         return parkingInfoMapper.deleteParkingInfoById(id);
+    }
+
+    /**
+     * 车辆入库，随机存放到一个空闲的停车位
+     *
+     * @param plate 车牌信息
+     * @return 停车位编号
+     */
+    @Override
+    public Long carPark(String plate) {
+        Random rand = new Random();
+        int MAX = 14019, MIN = 14000;
+        int id;
+        while (true) {
+            id = rand.nextInt(MAX - MIN + 1) + MIN;
+            // 表示车位为空
+            if (flag[id - 14000] == 0) {
+                System.out.println(flag[id - 14000]);
+                flag[id - 14000] = 1;
+                break;
+            }
+        }
+        Long idl = new Long(id);
+        // 此时的 id 即为车位编号
+        ParkingInfo parkingInfo = new ParkingInfo();
+        parkingInfo.setId(idl);
+        parkingInfo.setStatus(1);
+        parkingInfo.setCarPlate(plate);
+
+        //更新车位信息表
+        int i = parkingInfoMapper.updateParkingInfo(parkingInfo);
+        System.out.println("受影响的行数=====>" + i);
+        ParkingInfo info = parkingInfoMapper.selectParkingInfoById(idl);
+        System.out.println(info.toString());
+
+        return (long) id;
+
     }
 }

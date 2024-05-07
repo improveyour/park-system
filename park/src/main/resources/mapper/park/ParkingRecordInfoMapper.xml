@@ -30,13 +30,13 @@
     <select id="selectParkingRecordInfoList" parameterType="ParkingRecordInfo" resultMap="ParkingRecordInfoResult">
         <include refid="selectParkingRecordInfoVo"/>
         <where>
-            <if test="pay != null ">and pay = #{pay}</if>
+            <if test="pay != null">and pay = #{pay}</if>
             <if test="positions != null  and positions != ''">and positions = #{positions}</if>
-            <if test="parkingTime != null ">and parking_time = #{parkingTime}</if>
-            <if test="leaveTime != null ">and leave_time = #{leaveTime}</if>
+            <if test="parkingTime != null  and parkingTime != ''">and parking_time = #{parkingTime}</if>
+            <if test="leaveTime != null  and leaveTime != ''">and leave_time = #{leaveTime}</if>
             <if test="carPlate != null  and carPlate != ''">and car_plate = #{carPlate}</if>
             <if test="parkingId != null  and parkingId != ''">and parking_id = #{parkingId}</if>
-            <if test="payTime != null ">and pay_time = #{payTime}</if>
+            <if test="payTime != null  and payTime != ''">and pay_time = #{payTime}</if>
         </where>
     </select>
 
@@ -51,21 +51,21 @@
             <if test="id != null">id,</if>
             <if test="pay != null">pay,</if>
             <if test="positions != null and positions != ''">positions,</if>
-            <if test="parkingTime != null">parking_time,</if>
-            <if test="leaveTime != null">leave_time,</if>
+            <if test="parkingTime != null and parkingTime != ''">parking_time,</if>
+            <if test="leaveTime != null and leaveTime != ''">leave_time,</if>
             <if test="carPlate != null and carPlate != ''">car_plate,</if>
             <if test="parkingId != null and parkingId != ''">parking_id,</if>
-            <if test="payTime != null">pay_time,</if>
+            <if test="payTime != null and payTime != ''">pay_time,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="pay != null">#{pay},</if>
             <if test="positions != null and positions != ''">#{positions},</if>
-            <if test="parkingTime != null">#{parkingTime},</if>
-            <if test="leaveTime != null">#{leaveTime},</if>
+            <if test="parkingTime != null and parkingTime != ''">#{parkingTime},</if>
+            <if test="leaveTime != null and leaveTime != ''">#{leaveTime},</if>
             <if test="carPlate != null and carPlate != ''">#{carPlate},</if>
             <if test="parkingId != null and parkingId != ''">#{parkingId},</if>
-            <if test="payTime != null">#{payTime},</if>
+            <if test="payTime != null and payTime != ''">#{payTime},</if>
         </trim>
     </insert>
 
@@ -74,11 +74,11 @@
         <trim prefix="SET" suffixOverrides=",">
             <if test="pay != null">pay = #{pay},</if>
             <if test="positions != null and positions != ''">positions = #{positions},</if>
-            <if test="parkingTime != null">parking_time = #{parkingTime},</if>
-            <if test="leaveTime != null">leave_time = #{leaveTime},</if>
+            <if test="parkingTime != null and parkingTime != ''">parking_time = #{parkingTime},</if>
+            <if test="leaveTime != null and leaveTime != ''">leave_time = #{leaveTime},</if>
             <if test="carPlate != null and carPlate != ''">car_plate = #{carPlate},</if>
             <if test="parkingId != null and parkingId != ''">parking_id = #{parkingId},</if>
-            <if test="payTime != null">pay_time = #{payTime},</if>
+            <if test="payTime != null and payTime != ''">pay_time = #{payTime},</if>
         </trim>
         where id = #{id}
     </update>

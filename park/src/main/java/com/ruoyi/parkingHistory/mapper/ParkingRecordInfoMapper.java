@@ -8,7 +8,7 @@ import java.util.List;
  * 查询停车记录Mapper接口
  *
  * @author bigcar
- * @date 2024-04-29
+ * @date 2024-05-07
  */
 public interface ParkingRecordInfoMapper {
     /**

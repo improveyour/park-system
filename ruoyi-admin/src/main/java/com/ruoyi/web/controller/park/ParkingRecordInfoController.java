@@ -20,7 +20,7 @@ import java.util.List;
  * 查询停车记录Controller
  *
  * @author bigcar
- * @date 2024-04-29
+ * @date 2024-05-07
  */
 @Controller
 @RequestMapping("/park/parkingHistory")
@@ -45,6 +45,9 @@ public class ParkingRecordInfoController extends BaseController {
     public TableDataInfo list(ParkingRecordInfo parkingRecordInfo) {
         startPage();
         List<ParkingRecordInfo> list = parkingRecordInfoService.selectParkingRecordInfoList(parkingRecordInfo);
+        System.out.println(list);
+        // 剔除 pay 为 -1 的记录，这些记录代表为未付款的
+        list.removeIf(list_mid -> list_mid.getPay() == -1);
         return getDataTable(list);
     }
 

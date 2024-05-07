@@ -58,4 +58,12 @@ public interface IParkingInfoService {
      * @return 结果
      */
     public int deleteParkingInfoById(Long id);
+
+    /**
+     * 车辆入库，随机存放到一个空闲的停车位
+     *
+     * @param plate 车牌信息
+     * @return 停车位编号
+     */
+    public Long carPark(String plate);
 }

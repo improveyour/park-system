@@ -160,7 +160,7 @@ values (14019, '东门保安亭旁边20', 0);
 -- 停车记录表
 create table if not exists `parking_record_info`
 (
-    `id`           bigint       not null comment '主键' primary key,
+    `id`           bigint       not null comment '主键' primary key auto_increment,
     `pay`          int          not null comment '缴费金额',
     `positions`    varchar(100) not null comment '车位位置',
     `parking_time` timestamp    not null comment '入库时间',
