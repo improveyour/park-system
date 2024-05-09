@@ -13,6 +13,7 @@
         <result property="carPlate" column="car_plate"/>
         <result property="parkingId" column="parking_id"/>
         <result property="payTime" column="pay_time"/>
+        <result property="payStatus" column="pay_status"/>
     </resultMap>
 
     <sql id="selectParkingRecordInfoVo">
@@ -23,20 +24,22 @@
                leave_time,
                car_plate,
                parking_id,
-               pay_time
+               pay_time,
+               pay_status
         from parking_record_info
     </sql>
 
     <select id="selectParkingRecordInfoList" parameterType="ParkingRecordInfo" resultMap="ParkingRecordInfoResult">
         <include refid="selectParkingRecordInfoVo"/>
         <where>
-            <if test="pay != null">and pay = #{pay}</if>
+            <if test="pay != null ">and pay = #{pay}</if>
             <if test="positions != null  and positions != ''">and positions = #{positions}</if>
             <if test="parkingTime != null  and parkingTime != ''">and parking_time = #{parkingTime}</if>
             <if test="leaveTime != null  and leaveTime != ''">and leave_time = #{leaveTime}</if>
             <if test="carPlate != null  and carPlate != ''">and car_plate = #{carPlate}</if>
-            <if test="parkingId != null  and parkingId != ''">and parking_id = #{parkingId}</if>
+            <if test="parkingId != null ">and parking_id = #{parkingId}</if>
             <if test="payTime != null  and payTime != ''">and pay_time = #{payTime}</if>
+            <if test="payStatus != null  and payStatus != ''">and pay_status = #{payStatus}</if>
         </where>
     </select>
 
@@ -45,27 +48,27 @@
         where id = #{id}
     </select>
 
-    <insert id="insertParkingRecordInfo" parameterType="ParkingRecordInfo">
+    <insert id="insertParkingRecordInfo" parameterType="ParkingRecordInfo" useGeneratedKeys="true" keyProperty="id">
         insert into parking_record_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="pay != null">pay,</if>
             <if test="positions != null and positions != ''">positions,</if>
             <if test="parkingTime != null and parkingTime != ''">parking_time,</if>
             <if test="leaveTime != null and leaveTime != ''">leave_time,</if>
             <if test="carPlate != null and carPlate != ''">car_plate,</if>
-            <if test="parkingId != null and parkingId != ''">parking_id,</if>
+            <if test="parkingId != null">parking_id,</if>
             <if test="payTime != null and payTime != ''">pay_time,</if>
+            <if test="payStatus != null and payStatus != ''">pay_status,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="pay != null">#{pay},</if>
             <if test="positions != null and positions != ''">#{positions},</if>
             <if test="parkingTime != null and parkingTime != ''">#{parkingTime},</if>
             <if test="leaveTime != null and leaveTime != ''">#{leaveTime},</if>
             <if test="carPlate != null and carPlate != ''">#{carPlate},</if>
-            <if test="parkingId != null and parkingId != ''">#{parkingId},</if>
+            <if test="parkingId != null">#{parkingId},</if>
             <if test="payTime != null and payTime != ''">#{payTime},</if>
+            <if test="payStatus != null and payStatus != ''">#{payStatus},</if>
         </trim>
     </insert>
 
@@ -77,8 +80,9 @@
             <if test="parkingTime != null and parkingTime != ''">parking_time = #{parkingTime},</if>
             <if test="leaveTime != null and leaveTime != ''">leave_time = #{leaveTime},</if>
             <if test="carPlate != null and carPlate != ''">car_plate = #{carPlate},</if>
-            <if test="parkingId != null and parkingId != ''">parking_id = #{parkingId},</if>
+            <if test="parkingId != null">parking_id = #{parkingId},</if>
             <if test="payTime != null and payTime != ''">pay_time = #{payTime},</if>
+            <if test="payStatus != null and payStatus != ''">pay_status = #{payStatus},</if>
         </trim>
         where id = #{id}
     </update>
@@ -95,5 +99,15 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectParkingRecordInfoByPlate" parameterType="String" resultMap="ParkingRecordInfoResult">
+        <include refid="selectParkingRecordInfoVo"/>
+        where car_plate = #{plate}
+    </select>
+
+    <select id="selectParkingRecordInfoByPlateAndStatus" resultMap="ParkingRecordInfoResult">
+        <include refid="selectParkingRecordInfoVo"/>
+        where car_plate = #{plate} and pay = #{pay} and pay_status = #{status}
+    </select>
 
 </mapper>

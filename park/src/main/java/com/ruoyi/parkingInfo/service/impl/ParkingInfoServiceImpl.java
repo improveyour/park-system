@@ -21,6 +21,9 @@ public class ParkingInfoServiceImpl implements IParkingInfoService {
     @Autowired
     private ParkingInfoMapper parkingInfoMapper;
 
+    // 停车位总数目
+    private static Integer MAX_PARKING_SPACES = 20;
+
     // 用于标识车位是否被占用
     // 这种写法并不合理，按道理应该要查数据库
     private int flag[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -102,29 +105,52 @@ public class ParkingInfoServiceImpl implements IParkingInfoService {
         Random rand = new Random();
         int MAX = 14019, MIN = 14000;
         int id;
-        while (true) {
-            id = rand.nextInt(MAX - MIN + 1) + MIN;
-            // 表示车位为空
-            if (flag[id - 14000] == 0) {
-                System.out.println(flag[id - 14000]);
-                flag[id - 14000] = 1;
-                break;
+        int count = 20;
+        for (int i = 0; i < MAX_PARKING_SPACES; i++) {
+            if (flag[i] == 1) {
+                count--;
             }
         }
-        Long idl = new Long(id);
-        // 此时的 id 即为车位编号
-        ParkingInfo parkingInfo = new ParkingInfo();
-        parkingInfo.setId(idl);
-        parkingInfo.setStatus(1);
-        parkingInfo.setCarPlate(plate);
+        System.out.println("目前有==========> " + count + " 个空闲车位");
+        // 在进行入库操作前，需要判断停车场是否有空闲车位
+        if (count < MAX_PARKING_SPACES) {
+            while (true) {
+                id = rand.nextInt(MAX - MIN + 1) + MIN;
+                // 表示车位为空
+                if (flag[id - 14000] == 0) {
+                    System.out.println("在第 " + flag[id - 14000] + " 车位");
+                    flag[id - 14000] = 1;
+                    break;
+                }
+            }
+            // 此时的 id 即为车位编号
+            Long idl = new Long(id);
 
-        //更新车位信息表
-        int i = parkingInfoMapper.updateParkingInfo(parkingInfo);
-        System.out.println("受影响的行数=====>" + i);
-        ParkingInfo info = parkingInfoMapper.selectParkingInfoById(idl);
-        System.out.println(info.toString());
+            ParkingInfo parkingInfo = new ParkingInfo();
+            parkingInfo.setId(idl);
+            parkingInfo.setStatus(1);
+            parkingInfo.setCarPlate(plate);
 
-        return (long) id;
+            //更新车位信息表
+            int i = parkingInfoMapper.updateParkingInfo(parkingInfo);
+            System.out.println("受影响的行数=====>" + i);
+            ParkingInfo info = parkingInfoMapper.selectParkingInfoById(idl);
+            System.out.println(info.toString());
 
+            return (long) id;
+        }
+        return null;
+    }
+
+
+    /**
+     * 根据车牌号修改车位信息，用于出库操作
+     *
+     * @param plate
+     * @return
+     */
+    @Override
+    public ParkingInfo updateParkingInfoByPlate(String plate) {
+        return parkingInfoMapper.updateParkingInfoByPlate(plate);
     }
 }

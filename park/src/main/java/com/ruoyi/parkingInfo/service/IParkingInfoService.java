@@ -66,4 +66,13 @@ public interface IParkingInfoService {
      * @return 停车位编号
      */
     public Long carPark(String plate);
+
+    /**
+     * 根据车牌号修改车位信息，用于出库操作
+     *
+     * @param plate
+     * @return
+     */
+    public ParkingInfo updateParkingInfoByPlate(String plate);
+
 }

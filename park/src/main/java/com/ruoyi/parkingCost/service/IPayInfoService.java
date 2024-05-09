@@ -58,4 +58,11 @@ public interface IPayInfoService {
      * @return 结果
      */
     public int deletePayInfoById(Long id);
+
+    /**
+     * 获得全部收费标准信息
+     *
+     * @return 结果
+     */
+    public List<PayInfo> getAll();
 }

@@ -167,13 +167,14 @@ create table if not exists `parking_record_info`
     `leave_time`   timestamp    not null comment '出库时间',
     `car_plate`    varchar(50)  not null comment '车牌号',
     `parking_id`   bigint       not null comment '车位编号',
-    `pay_time`     timestamp    not null comment '缴费时间'
+    `pay_time`     timestamp    not null comment '缴费时间',
+    `pay_status`   int          not null comment '是否缴费，0为未支付，1为已支付'
 ) comment '停车记录表';
 
 insert into `parking_record_info` (`id`, `pay`, `positions`, `parking_time`, `leave_time`, `car_plate`, `parking_id`,
-                                   `pay_time`)
+                                   `pay_time`, `pay_status`)
 values (15000, 5, '东门保安亭旁边1', '2024-04-25 09:14:07', '2024-04-25 10:18:25', '粤B114514', 14000,
-        '2024-04-25 10:18:20');
+        '2024-04-25 10:18:20', 1);
 
 DROP TABLE IF EXISTS QRTZ_FIRED_TRIGGERS;
 DROP TABLE IF EXISTS QRTZ_PAUSED_TRIGGER_GRPS;

@@ -69,4 +69,11 @@
         </foreach>
     </delete>
 
+
+    <select id="updateParkingInfoByPlate" parameterType="String" resultMap="ParkingInfoResult">
+        <include refid="selectParkingInfoVo"/>
+        where car_plate = #{plate}
+    </select>
+
+
 </mapper>

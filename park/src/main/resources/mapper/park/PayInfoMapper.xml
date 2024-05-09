@@ -64,4 +64,10 @@
         </foreach>
     </delete>
 
+    <select id="getAll" parameterType="PayInfo" resultMap="PayInfoResult">
+        select *
+        from pay_info
+    </select>
+
+
 </mapper>

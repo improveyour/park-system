@@ -46,10 +46,11 @@
 
     <div class="col-sm-2">
         <h3>Hello,Guest</h3>
-        <small>移动设备访问请扫描以下二维码：</small>
+        <small>请扫描以下二维码进行支付：</small>
         <br>
         <br>
-        <img th:src="@{/img/qr_code.png}" width="100%" style="max-width:400px;">
+        <!--        <img id="qrImg" th:src="@{/img/qr_code.png}" width="100%" style="max-width:400px;">-->
+        <img id="qrImg" src="/img/qr_code.png" width="100%" style="max-width:400px;">
         <br>
     </div>
     <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
@@ -73,6 +74,8 @@
 <script th:src="@{/ajax/libs/bootstrap-fileinput/fileinput.min.js}"></script>
 
 <script type="text/javascript">
+
+    var Cost;
 
     // 模拟入库
     $(function () {
@@ -116,6 +119,10 @@
                 response = data.response, reader = data.reader;
             console.log(response);//打印出返回的json
             console.log(response.status);//打印出状态
+
+            // 刷新当前页面
+            location.reload();
+
             alert(response.msg)
 
         }).on('filebatchuploaderror', function (event, data, msg) {  //一个文件上传失败
@@ -164,8 +171,20 @@
             var form = data.outputForm, files = data.files, extra = data.extra,
                 response = data.response, reader = data.reader;
             console.log(response);//打印出返回的json
-            console.log(response.status);//打印出状态
+
+            // var imgElement = document.getElementById("qrImg")
+            // console.log("before:imgElement.src = " + imgElement.src)
+            //
+            //
+            // console.log(response.status);//打印出状态
+            // var codeImg = "/img/pay_" + response.cost + ".png"
+            // imgElement.src = codeImg
+            //
+            //
+            // console.log("imgElement.src = " + imgElement.src)
+
             alert(response.msg)
+
 
         }).on('filebatchuploaderror', function (event, data, msg) {  //一个文件上传失败
             console.log('文件上传失败！' + data.status);
@@ -173,17 +192,6 @@
     }
 
 
-    $('#pay-qrcode').click(function () {
-        var html = $(this).html();
-        parent.layer.open({
-            title: false,
-            type: 1,
-            closeBtn: false,
-            shadeClose: true,
-            area: ['600px', '360px'],
-            content: html
-        });
-    });
 
     // 引入 echarts 的柱状图，用于记录近七天的总收入
     var chartDom = document.getElementById('column-chart-main');
@@ -269,8 +277,7 @@
                     show: false
                 },
                 data: [
-                    {value: 1048, name: '不足1小时'},
-                    {value: 735, name: '1~2小时之内'},
+                    {value: 1048, name: '不足2小时'},
                     {value: 580, name: '2~4小时之内'},
                     {value: 484, name: '4~6小时之内'},
                     {value: 300, name: '超过6小时'}

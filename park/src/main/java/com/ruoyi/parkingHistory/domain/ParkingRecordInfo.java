@@ -6,44 +6,66 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * 查询停车记录对象 parking_record_info
+ * 停车记录对象 parking_record_info
  *
  * @author bigcar
- * @date 2024-05-07
+ * @date 2024-05-08
  */
 public class ParkingRecordInfo extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    /** 主键 */
+    /**
+     * 主键
+     */
     private Long id;
 
-    /** 缴费金额 */
+    /**
+     * 缴费金额
+     */
     @Excel(name = "缴费金额")
     private Integer pay;
 
-    /** 车位位置 */
+    /**
+     * 车位位置
+     */
     @Excel(name = "车位位置")
     private String positions;
 
-    /** 入库时间 */
+    /**
+     * 入库时间
+     */
     @Excel(name = "入库时间")
     private String parkingTime;
 
-    /** 出库时间 */
+    /**
+     * 出库时间
+     */
     @Excel(name = "出库时间")
     private String leaveTime;
 
-    /** 车牌号 */
+    /**
+     * 车牌号
+     */
     @Excel(name = "车牌号")
     private String carPlate;
 
-    /** 车位编号 */
+    /**
+     * 车位编号
+     */
     @Excel(name = "车位编号")
-    private String parkingId;
+    private Long parkingId;
 
-    /** 缴费时间 */
+    /**
+     * 缴费时间
+     */
     @Excel(name = "缴费时间")
     private String payTime;
+
+    /**
+     * 缴费状态
+     */
+    @Excel(name = "缴费状态")
+    private String payStatus;
 
     public void setId(Long id) {
         this.id = id;
@@ -93,11 +115,11 @@ public class ParkingRecordInfo extends BaseEntity {
         return carPlate;
     }
 
-    public void setParkingId(String parkingId) {
+    public void setParkingId(Long parkingId) {
         this.parkingId = parkingId;
     }
 
-    public String getParkingId() {
+    public Long getParkingId() {
         return parkingId;
     }
 
@@ -107,6 +129,14 @@ public class ParkingRecordInfo extends BaseEntity {
 
     public String getPayTime() {
         return payTime;
+    }
+
+    public void setPayStatus(String payStatus) {
+        this.payStatus = payStatus;
+    }
+
+    public String getPayStatus() {
+        return payStatus;
     }
 
     @Override
@@ -120,6 +150,7 @@ public class ParkingRecordInfo extends BaseEntity {
                 .append("carPlate", getCarPlate())
                 .append("parkingId", getParkingId())
                 .append("payTime", getPayTime())
+                .append("payStatus", getPayStatus())
                 .toString();
     }
 }

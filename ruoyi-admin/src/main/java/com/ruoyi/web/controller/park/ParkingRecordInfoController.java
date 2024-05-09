@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 查询停车记录Controller
+ * 停车记录Controller
  *
  * @author bigcar
- * @date 2024-05-07
+ * @date 2024-05-08
  */
 @Controller
 @RequestMapping("/park/parkingHistory")
@@ -37,7 +37,7 @@ public class ParkingRecordInfoController extends BaseController {
     }
 
     /**
-     * 查询查询停车记录列表
+     * 查询停车记录列表
      */
     @RequiresPermissions("park:parkingHistory:list")
     @PostMapping("/list")
@@ -45,27 +45,24 @@ public class ParkingRecordInfoController extends BaseController {
     public TableDataInfo list(ParkingRecordInfo parkingRecordInfo) {
         startPage();
         List<ParkingRecordInfo> list = parkingRecordInfoService.selectParkingRecordInfoList(parkingRecordInfo);
-        System.out.println(list);
-        // 剔除 pay 为 -1 的记录，这些记录代表为未付款的
-        list.removeIf(list_mid -> list_mid.getPay() == -1);
         return getDataTable(list);
     }
 
     /**
-     * 导出查询停车记录列表
+     * 导出停车记录列表
      */
     @RequiresPermissions("park:parkingHistory:export")
-    @Log(title = "查询停车记录", businessType = BusinessType.EXPORT)
+    @Log(title = "停车记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(ParkingRecordInfo parkingRecordInfo) {
         List<ParkingRecordInfo> list = parkingRecordInfoService.selectParkingRecordInfoList(parkingRecordInfo);
         ExcelUtil<ParkingRecordInfo> util = new ExcelUtil<ParkingRecordInfo>(ParkingRecordInfo.class);
-        return util.exportExcel(list, "查询停车记录数据");
+        return util.exportExcel(list, "停车记录数据");
     }
 
     /**
-     * 新增查询停车记录
+     * 新增停车记录
      */
     @GetMapping("/add")
     public String add() {
@@ -73,10 +70,10 @@ public class ParkingRecordInfoController extends BaseController {
     }
 
     /**
-     * 新增保存查询停车记录
+     * 新增保存停车记录
      */
     @RequiresPermissions("park:parkingHistory:add")
-    @Log(title = "查询停车记录", businessType = BusinessType.INSERT)
+    @Log(title = "停车记录", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(ParkingRecordInfo parkingRecordInfo) {
@@ -84,7 +81,7 @@ public class ParkingRecordInfoController extends BaseController {
     }
 
     /**
-     * 修改查询停车记录
+     * 修改停车记录
      */
     @RequiresPermissions("park:parkingHistory:edit")
     @GetMapping("/edit/{id}")
@@ -95,10 +92,10 @@ public class ParkingRecordInfoController extends BaseController {
     }
 
     /**
-     * 修改保存查询停车记录
+     * 修改保存停车记录
      */
     @RequiresPermissions("park:parkingHistory:edit")
-    @Log(title = "查询停车记录", businessType = BusinessType.UPDATE)
+    @Log(title = "停车记录", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(ParkingRecordInfo parkingRecordInfo) {
@@ -106,10 +103,10 @@ public class ParkingRecordInfoController extends BaseController {
     }
 
     /**
-     * 删除查询停车记录
+     * 删除停车记录
      */
     @RequiresPermissions("park:parkingHistory:remove")
-    @Log(title = "查询停车记录", businessType = BusinessType.DELETE)
+    @Log(title = "停车记录", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {

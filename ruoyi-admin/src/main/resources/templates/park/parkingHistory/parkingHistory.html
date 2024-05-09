@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('查询停车记录列表')"/>
+    <th:block th:include="include :: header('停车记录列表')"/>
 </head>
 <body class="gray-bg">
 <div class="container-div">
@@ -19,24 +19,12 @@
                             <input type="text" name="positions"/>
                         </li>
                         <li>
-                            <label>入库时间：</label>
-                            <input type="text" name="parkingTime"/>
-                        </li>
-                        <li>
-                            <label>出库时间：</label>
-                            <input type="text" name="leaveTime"/>
-                        </li>
-                        <li>
                             <label>车牌号：</label>
                             <input type="text" name="carPlate"/>
                         </li>
                         <li>
                             <label>车位编号：</label>
                             <input type="text" name="parkingId"/>
-                        </li>
-                        <li>
-                            <label>缴费时间：</label>
-                            <input type="text" name="payTime"/>
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
@@ -83,7 +71,7 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            modalName: "查询停车记录",
+            modalName: "停车记录",
             columns: [{
                 checkbox: true
             },
@@ -119,6 +107,10 @@
                 {
                     field: 'payTime',
                     title: '缴费时间'
+                },
+                {
+                    field: 'payStatus',
+                    title: '缴费状态'
                 },
                 {
                     title: '操作',

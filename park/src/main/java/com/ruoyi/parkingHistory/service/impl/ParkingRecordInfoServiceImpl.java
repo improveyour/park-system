@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 查询停车记录Service业务层处理
+ * 停车记录Service业务层处理
  *
  * @author bigcar
- * @date 2024-05-07
+ * @date 2024-05-08
  */
 @Service
 public class ParkingRecordInfoServiceImpl implements IParkingRecordInfoService {
@@ -21,10 +21,10 @@ public class ParkingRecordInfoServiceImpl implements IParkingRecordInfoService {
     private ParkingRecordInfoMapper parkingRecordInfoMapper;
 
     /**
-     * 查询查询停车记录
+     * 查询停车记录
      *
-     * @param id 查询停车记录主键
-     * @return 查询停车记录
+     * @param id 停车记录主键
+     * @return 停车记录
      */
     @Override
     public ParkingRecordInfo selectParkingRecordInfoById(Long id) {
@@ -32,20 +32,30 @@ public class ParkingRecordInfoServiceImpl implements IParkingRecordInfoService {
     }
 
     /**
-     * 查询查询停车记录列表
+     * 查询停车记录列表
      *
-     * @param parkingRecordInfo 查询停车记录
-     * @return 查询停车记录
+     * @param parkingRecordInfo 停车记录
+     * @return 停车记录
      */
     @Override
     public List<ParkingRecordInfo> selectParkingRecordInfoList(ParkingRecordInfo parkingRecordInfo) {
-        return parkingRecordInfoMapper.selectParkingRecordInfoList(parkingRecordInfo);
+        List<ParkingRecordInfo> parkingRecordInfos = parkingRecordInfoMapper.selectParkingRecordInfoList(parkingRecordInfo);
+
+//        Iterator iterator = parkingRecordInfos.iterator();
+//        while (iterator.hasNext()) {
+//            ParkingRecordInfo next = (ParkingRecordInfo)iterator.next();
+//            if ("0".equals(next.getPayStatus()) && next.getPay() >= 0) {
+//                // 注意！！！这里时Iterator.remove()!!!而不是list.remove()!!!
+//                iterator.remove();
+//            }
+//        }
+        return parkingRecordInfos;
     }
 
     /**
-     * 新增查询停车记录
+     * 新增停车记录
      *
-     * @param parkingRecordInfo 查询停车记录
+     * @param parkingRecordInfo 停车记录
      * @return 结果
      */
     @Override
@@ -54,9 +64,9 @@ public class ParkingRecordInfoServiceImpl implements IParkingRecordInfoService {
     }
 
     /**
-     * 修改查询停车记录
+     * 修改停车记录
      *
-     * @param parkingRecordInfo 查询停车记录
+     * @param parkingRecordInfo 停车记录
      * @return 结果
      */
     @Override
@@ -65,9 +75,9 @@ public class ParkingRecordInfoServiceImpl implements IParkingRecordInfoService {
     }
 
     /**
-     * 批量删除查询停车记录
+     * 批量删除停车记录
      *
-     * @param ids 需要删除的查询停车记录主键
+     * @param ids 需要删除的停车记录主键
      * @return 结果
      */
     @Override
@@ -76,13 +86,35 @@ public class ParkingRecordInfoServiceImpl implements IParkingRecordInfoService {
     }
 
     /**
-     * 删除查询停车记录信息
+     * 删除停车记录信息
      *
-     * @param id 查询停车记录主键
+     * @param id 停车记录主键
      * @return 结果
      */
     @Override
     public int deleteParkingRecordInfoById(Long id) {
         return parkingRecordInfoMapper.deleteParkingRecordInfoById(id);
+    }
+
+    /**
+     * 根据车牌号查询停车记录
+     *
+     * @param plate 停车记录主键
+     * @return 停车记录
+     */
+    public ParkingRecordInfo selectParkingRecordInfoByPlate(String plate) {
+        return parkingRecordInfoMapper.selectParkingRecordInfoByPlate(plate);
+    }
+
+    /**
+     * 根据车牌号，支付金额，支付状态查询停车记录，车辆出库的时候用
+     *
+     * @param plate
+     * @param pay
+     * @param status
+     * @return
+     */
+    public ParkingRecordInfo selectParkingRecordInfoByPlateAndStatus(String plate, int pay, int status) {
+        return parkingRecordInfoMapper.selectParkingRecordInfoByPlateAndStatus(plate, pay, status);
     }
 }

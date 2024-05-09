@@ -58,4 +58,11 @@ public interface PayInfoMapper {
      * @return 结果
      */
     public int deletePayInfoByIds(String[] ids);
+
+    /**
+     * 获取收费标准
+     *
+     * @return 结果
+     */
+    public List<PayInfo> getAll();
 }

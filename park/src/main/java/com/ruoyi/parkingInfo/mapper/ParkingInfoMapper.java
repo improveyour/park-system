@@ -58,4 +58,13 @@ public interface ParkingInfoMapper {
      * @return 结果
      */
     public int deleteParkingInfoByIds(String[] ids);
+
+    /**
+     * 根据车牌号修改车位信息，用于出库操作
+     *
+     * @param plate
+     * @return
+     */
+    public ParkingInfo updateParkingInfoByPlate(String plate);
+
 }

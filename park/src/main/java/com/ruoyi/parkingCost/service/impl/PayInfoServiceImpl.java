@@ -85,4 +85,14 @@ public class PayInfoServiceImpl implements IPayInfoService {
     public int deletePayInfoById(Long id) {
         return payInfoMapper.deletePayInfoById(id);
     }
+
+    /**
+     * 获取收费标准信息
+     *
+     * @return 结果
+     */
+    @Override
+    public List<PayInfo> getAll() {
+        return payInfoMapper.getAll();
+    }
 }
