@@ -42,7 +42,7 @@ public class ParkingController {
     @Autowired
     IPayInfoService payInfoService;
 
-    private static String fileLocation = "E:\\graduate\\park-system\\ruoyi-admin\\src\\main\\resources\\plate_img";
+    private static String fileLocation = "E:/graduate/park-system/ruoyi-admin/src/main/resources/plate_img/";
 
 
     //车辆入库
@@ -56,10 +56,16 @@ public class ParkingController {
         //将图片保存到服务器的目录下，并重命名，防止冲突
         String fileName = fileService.saveFile(files[0]);
 
+        System.out.println("新文件名为==============================>" + fileName);
+
         // todo 应该调用模型来识别车牌信息，根据识别结果来重命名图片
         plate = fileService.recPlateByFileName(files[0], fileName);
+        if (plate == "识别失败") {
+            map.put("status", 500);
+            map.put("msg", "识别失败！");
+            return map;
+        }
         System.out.println(plate);
-
 
         //获取当前时间
         Date nowDate = new Date();
@@ -109,7 +115,6 @@ public class ParkingController {
         System.out.println("受影响的行数为 =======> " + i);
 
 
-
         map.put("status", 200);
         map.put("msg", "车辆入库成功！时间为：" + format.format(nowDate));
         return map;
@@ -120,12 +125,14 @@ public class ParkingController {
     @PostMapping("/park/imgDelete")
     public @ResponseBody Map<String, Object> deleteImage(@RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
 
+
         // 得到上传文件后缀
         String originalName = files[0].getOriginalFilename();
         String ext = "." + FilenameUtils.getExtension(originalName);
 
         // todo 根据图片识别车牌号
-        String plate = fileService.recPlate(files[0]);
+        String plate = fileService.recPlate(files[0].getOriginalFilename());
+
         String target = plate + ext;
 
         System.out.println("车牌识别结果============> " + plate);
@@ -278,7 +285,7 @@ public class ParkingController {
         System.out.println("从小程序传过来的参数 ===============> " + plate);
 
         // 收到由微信小程序发过来的付款请求,校验金额是否正确
-        ParkingRecordInfo recordInfo = parkingRecordInfoService.selectParkingRecordInfoByPlate(plate);
+        ParkingRecordInfo recordInfo = parkingRecordInfoService.selectParkingRecordInfoByPlateAndStatus(plate, -1 * Integer.valueOf(money), 0);
         if (recordInfo == null) {
             System.out.println("未找到对应的车牌号");
             return "未找到对应的车牌号！";

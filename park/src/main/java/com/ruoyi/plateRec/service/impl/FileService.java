@@ -6,8 +6,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.UUID;
 
 @Service
@@ -43,13 +45,14 @@ public class FileService implements IFileService {
     @Override
     public String recPlateByFileName(MultipartFile file, String fileName) {
         // fileName是为了在文件夹中准确读取到对应的图片
-
-        // todo 进行识别
-        // 此处假设识别结果为 ： 粤bss002
         String ext = "." + FilenameUtils.getExtension(file.getOriginalFilename());
-        String plate = "粤bss002";
+        // 进行识别
+        String plate = recPlate(file, fileName);
+        if (plate == null) {
+            return "识别失败";
+        }
 
-        String recResult = "粤bss002" + ext;
+        String recResult = plate + ext;
         System.out.println("经过识别后重命名的文件名为=============> " + recResult);
 
         // 识别完了后要用识别结果来重命名文件
@@ -71,8 +74,61 @@ public class FileService implements IFileService {
     }
 
     @Override
-    public String recPlate(MultipartFile file) {
-        return "粤bss002";
+    public String recPlate(MultipartFile file, String fileName) {
+        String img_path = "E:/graduate/park-system/ruoyi-admin/src/main/resources/plate_img/" + fileName;
+        System.out.println("img_path=====================>" + img_path);
+        String plate = null;
+        try {
+            String[] args1 = new String[]{"python", "E:\\graduate\\Chinese_license_plate_detection_recognition-main\\java_demo.py", "--image_path", img_path};//第二个为python脚本所在位置，后面的为所传参数（得是字符串类型）
+            Process proc = Runtime.getRuntime().exec(args1);// 执行py文件
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(), "gb2312"));//解决中文乱码，参数可传中文
+            String line = null;
+            int i = 0;
+            while ((line = in.readLine()) != null) {
+                if (i == 0) {
+                    i++;
+                    continue;
+                }
+                System.out.println(line);
+                plate = line;
+            }
+            in.close();
+            proc.waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return plate.trim();
+    }
+
+    @Override
+    public String recPlate(String fileName) {
+        String img_path = "C:/Users/Administrator/Desktop/" + fileName;
+        System.out.println("img_path=====================>" + img_path);
+        String plate = null;
+        try {
+            String[] args1 = new String[]{"python", "E:\\graduate\\Chinese_license_plate_detection_recognition-main\\java_demo.py", "--image_path", img_path};//第二个为python脚本所在位置，后面的为所传参数（得是字符串类型）
+            Process proc = Runtime.getRuntime().exec(args1);// 执行py文件
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(), "gb2312"));//解决中文乱码，参数可传中文
+            String line = null;
+            int i = 0;
+            while ((line = in.readLine()) != null) {
+                if (i == 0) {
+                    i++;
+                    continue;
+                }
+                System.out.println(line);
+                plate = line;
+            }
+            in.close();
+            proc.waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return plate.trim();
     }
 
 

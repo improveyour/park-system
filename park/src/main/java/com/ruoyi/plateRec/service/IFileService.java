@@ -9,7 +9,9 @@ public interface IFileService {
     String recPlateByFileName(MultipartFile file, String fileName);
 
 
-    String recPlate(MultipartFile file);
+    String recPlate(MultipartFile file, String fileName);
+
+    String recPlate(String fileName);
 
     // 删除指定文件名的车牌照片
     boolean deleteFile(String fileName);

@@ -113,7 +113,7 @@ public class ParkingInfoServiceImpl implements IParkingInfoService {
         }
         System.out.println("目前有==========> " + count + " 个空闲车位");
         // 在进行入库操作前，需要判断停车场是否有空闲车位
-        if (count < MAX_PARKING_SPACES) {
+        if (count > 0) {
             while (true) {
                 id = rand.nextInt(MAX - MIN + 1) + MIN;
                 // 表示车位为空
