@@ -69,5 +69,4 @@
         from pay_info
     </select>
 
-
 </mapper>

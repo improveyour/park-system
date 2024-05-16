@@ -8,7 +8,7 @@ import java.util.List;
  * 收费标准Service接口
  *
  * @author bigcar
- * @date 2024-04-29
+ * @date 2024-05-13
  */
 public interface IPayInfoService {
     /**
@@ -60,9 +60,9 @@ public interface IPayInfoService {
     public int deletePayInfoById(Long id);
 
     /**
-     * 获得全部收费标准信息
+     * 获取全部收费标准
      *
-     * @return 结果
+     * @return
      */
     public List<PayInfo> getAll();
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * 收费标准Mapper接口
  *
  * @author bigcar
- * @date 2024-04-29
+ * @date 2024-05-13
  */
 public interface PayInfoMapper {
     /**
@@ -60,9 +60,9 @@ public interface PayInfoMapper {
     public int deletePayInfoByIds(String[] ids);
 
     /**
-     * 获取收费标准
+     * 获取全部收费标准
      *
-     * @return 结果
+     * @return
      */
     public List<PayInfo> getAll();
 }

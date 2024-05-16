@@ -13,7 +13,7 @@ import java.util.List;
  * 收费标准Service业务层处理
  *
  * @author bigcar
- * @date 2024-04-29
+ * @date 2024-05-13
  */
 @Service
 public class PayInfoServiceImpl implements IPayInfoService {
@@ -87,11 +87,10 @@ public class PayInfoServiceImpl implements IPayInfoService {
     }
 
     /**
-     * 获取收费标准信息
+     * 获取全部收费标准
      *
-     * @return 结果
+     * @return
      */
-    @Override
     public List<PayInfo> getAll() {
         return payInfoMapper.getAll();
     }

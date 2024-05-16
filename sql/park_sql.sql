@@ -87,7 +87,7 @@ values (12001, '粤B114515', 18000);
 -- 收费标准表
 create table if not exists `pay_info`
 (
-    `id`           bigint not null comment '主键' primary key,
+    `id`           bigint not null comment '主键' primary key auto_increment,
     `parking_time` int    not null comment '停放时间',
     `cost`         int    not null comment '费用'
 ) comment '收费标准表';

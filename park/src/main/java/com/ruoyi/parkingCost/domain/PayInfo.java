@@ -9,25 +9,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 收费标准对象 pay_info
  *
  * @author bigcar
- * @date 2024-04-29
+ * @date 2024-05-13
  */
 public class PayInfo extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
+    /** 主键 */
     private Long id;
 
-    /**
-     * 停放时间
-     */
+    /** 停放时间 */
     @Excel(name = "停放时间")
     private Integer parkingTime;
 
-    /**
-     * 费用
-     */
+    /** 费用 */
     @Excel(name = "费用")
     private Integer cost;
 
