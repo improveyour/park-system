@@ -28,6 +28,13 @@ public interface CarPlateInfoMapper {
     public List<CarPlateInfo> selectCarPlateInfoList(CarPlateInfo carPlateInfo);
 
     /**
+     * 通过手机号查询车牌
+     *
+     * @return 车牌列表
+     */
+    public List<CarPlateInfo> selectCarPlateInfoByPhone(String phone);
+
+    /**
      * 新增车牌
      *
      * @param carPlateInfo 车牌

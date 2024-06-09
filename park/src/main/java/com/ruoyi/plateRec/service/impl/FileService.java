@@ -3,6 +3,11 @@ package com.ruoyi.plateRec.service.impl;
 import com.ruoyi.plateRec.service.IFileService;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,7 +36,9 @@ public class FileService implements IFileService {
         System.out.println("新生成的文件名称 =================> " + fileName);
 
         // 得到新的文件File对象
+        // 这个路径是用来记录车辆是否在停车场内
         File targetFile = new File(localDir, fileName);
+
         // 开始复制文件
         try {
             FileUtils.writeByteArrayToFile(targetFile, file.getBytes());
@@ -42,6 +49,7 @@ public class FileService implements IFileService {
     }
 
     // 车牌识别，在这里要调用 python 模型，然后把识别结果给文件重命名
+    // 这里是车辆入库的时候进行调用
     @Override
     public String recPlateByFileName(MultipartFile file, String fileName) {
         // fileName是为了在文件夹中准确读取到对应的图片
@@ -73,62 +81,147 @@ public class FileService implements IFileService {
         return plate;
     }
 
+    // 车辆入库的时候调用
     @Override
     public String recPlate(MultipartFile file, String fileName) {
-        String img_path = "E:/graduate/park-system/ruoyi-admin/src/main/resources/plate_img/" + fileName;
-        System.out.println("img_path=====================>" + img_path);
         String plate = null;
-        try {
-            String[] args1 = new String[]{"python", "E:\\graduate\\Chinese_license_plate_detection_recognition-main\\java_demo.py", "--image_path", img_path};//第二个为python脚本所在位置，后面的为所传参数（得是字符串类型）
-            Process proc = Runtime.getRuntime().exec(args1);// 执行py文件
+        // 构建一个 get 请求发送给识别模型
+        // 当这个 flag 为 true 的时候说明是车辆入库，这样设计没啥好处，单纯是亡羊补牢
+        String url = "http://127.0.0.1:8000/http?flag=true&fileName=" + fileName;
+        HttpGet httpGet = new HttpGet(url);
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(), "gb2312"));//解决中文乱码，参数可传中文
+        httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        // httpClient实例化
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+
+        try {
+            // 执行请求并获取返回
+            CloseableHttpResponse response = httpClient.execute(httpGet);
+
+            HttpEntity entity = response.getEntity();
+            System.out.println("返回状态码：" + response.getStatusLine());
+
+            // 显示结果
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
             String line = null;
-            int i = 0;
-            while ((line = in.readLine()) != null) {
-                if (i == 0) {
-                    i++;
-                    continue;
-                }
-                System.out.println(line);
-                plate = line;
+            StringBuffer responseSB = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                responseSB.append(line);
             }
-            in.close();
-            proc.waitFor();
-        } catch (IOException | InterruptedException e) {
+            System.out.println("返回消息：" + responseSB);
+            plate = new String(responseSB);
+
+            reader.close();
+            httpClient.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return plate.trim();
+        if (plate != null) {
+            return plate.trim();
+        } else {
+            System.out.println();
+            return null;
+        }
+
+//        String img_path = "E:/graduate/park-system/ruoyi-admin/src/main/resources/plate_img/" + fileName;
+//        System.out.println("img_path=====================>" + img_path);
+//        String plate = null;
+//        try {
+//            String[] args1 = new String[]{"python", "E:\\graduate\\Chinese_license_plate_detection_recognition-main\\java_demo.py", "--image_path", img_path};//第二个为python脚本所在位置，后面的为所传参数（得是字符串类型）
+//            Process proc = Runtime.getRuntime().exec(args1);// 执行py文件
+//
+//            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(), "gb2312"));//解决中文乱码，参数可传中文
+//            String line = null;
+//            int i = 0;
+//            while ((line = in.readLine()) != null) {
+//                if (i == 0) {
+//                    i++;
+//                    continue;
+//                }
+//                System.out.println(line);
+//                plate = line;
+//            }
+//            in.close();
+//            proc.waitFor();
+//        } catch (IOException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        if (plate != null) {
+//            return plate.trim();
+//        } else {
+//            return null;
+//        }
+
     }
 
+
+    // 车辆出库的时候调用
     @Override
     public String recPlate(String fileName) {
-        String img_path = "C:/Users/Administrator/Desktop/" + fileName;
-        System.out.println("img_path=====================>" + img_path);
         String plate = null;
-        try {
-            String[] args1 = new String[]{"python", "E:\\graduate\\Chinese_license_plate_detection_recognition-main\\java_demo.py", "--image_path", img_path};//第二个为python脚本所在位置，后面的为所传参数（得是字符串类型）
-            Process proc = Runtime.getRuntime().exec(args1);// 执行py文件
+        // 构建一个 get 请求发送给识别模型
+        String url = "http://127.0.0.1:8000/http?flag=false&fileName=" + fileName;
+        HttpGet httpGet = new HttpGet(url);
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(), "gb2312"));//解决中文乱码，参数可传中文
+        httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        // httpClient实例化
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+
+        try {
+            // 执行请求并获取返回
+            CloseableHttpResponse response = httpClient.execute(httpGet);
+
+            HttpEntity entity = response.getEntity();
+            System.out.println("返回状态码：" + response.getStatusLine());
+
+            // 显示结果
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
             String line = null;
-            int i = 0;
-            while ((line = in.readLine()) != null) {
-                if (i == 0) {
-                    i++;
-                    continue;
-                }
-                System.out.println(line);
-                plate = line;
+            StringBuffer responseSB = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                responseSB.append(line);
             }
-            in.close();
-            proc.waitFor();
-        } catch (IOException | InterruptedException e) {
+            System.out.println("返回消息：" + responseSB);
+            plate = new String(responseSB);
+
+            reader.close();
+            httpClient.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return plate.trim();
+        if (plate != null) {
+            return plate.trim();
+        } else {
+            System.out.println();
+            return null;
+        }
+//        String img_path = "C:/Users/Administrator/Desktop/download/" + fileName;
+//        System.out.println("img_path=====================>" + img_path);
+//        try {
+//            String[] args1 = new String[]{"python", "E:\\graduate\\Chinese_license_plate_detection_recognition-main\\java_demo.py", "--image_path", img_path};//第二个为python脚本所在位置，后面的为所传参数（得是字符串类型）
+//            Process proc = Runtime.getRuntime().exec(args1);// 执行py文件
+//
+//            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(), "gb2312"));//解决中文乱码，参数可传中文
+//            String line = null;
+//            int i = 0;
+//            while ((line = in.readLine()) != null) {
+//                if (i == 0) {
+//                    i++;
+//                    continue;
+//                }
+//                System.out.println(line);
+//                plate = line;
+//            }
+//            in.close();
+//            proc.waitFor();
+//        } catch (IOException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+
     }
 
 

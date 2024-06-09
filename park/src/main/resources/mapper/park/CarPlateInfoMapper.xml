@@ -23,6 +23,12 @@
         </where>
     </select>
 
+    <select id="selectCarPlateInfoByPhone" parameterType="CarPlateInfo" resultMap="CarPlateInfoResult">
+        select *
+        from car_plate_info
+        where user_id = (select id from user_info where phone = #{phone})
+    </select>
+
     <select id="selectCarPlateInfoById" parameterType="Long" resultMap="CarPlateInfoResult">
         <include refid="selectCarPlateInfoVo"/>
         where id = #{id}

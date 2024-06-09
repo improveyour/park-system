@@ -58,7 +58,7 @@ public class ParkingController {
 
         System.out.println("新文件名为==============================>" + fileName);
 
-        // todo 应该调用模型来识别车牌信息，根据识别结果来重命名图片
+        // 调用模型来识别车牌信息，根据识别结果来重命名图片
         plate = fileService.recPlateByFileName(files[0], fileName);
         if (plate == "识别失败") {
             map.put("status", 500);
@@ -116,7 +116,7 @@ public class ParkingController {
 
 
         map.put("status", 200);
-        map.put("msg", "车辆入库成功！时间为：" + format.format(nowDate));
+        map.put("msg", "车牌号为：" + plate + "，入库时间为：" + format.format(nowDate) + "，车辆入库成功！");
         return map;
     }
 
@@ -129,6 +129,7 @@ public class ParkingController {
         // 得到上传文件后缀
         String originalName = files[0].getOriginalFilename();
         String ext = "." + FilenameUtils.getExtension(originalName);
+
 
         // todo 根据图片识别车牌号
         String plate = fileService.recPlate(files[0].getOriginalFilename());
@@ -259,7 +260,7 @@ public class ParkingController {
             time = String.format(time, h, m, s);
 
             map.put("status", 200);
-            map.put("msg", "停车时间为：" + time + ",需要支付 " + cost + " 元，请扫码支付！");
+            map.put("msg", "车牌号为： " + plate + " 的车辆停车时间为：" + time + ",需要支付 " + cost + " 元，请扫码支付！");
             map.put("cost", cost);
 
             // 进行支付操作
@@ -316,10 +317,10 @@ public class ParkingController {
             int i1 = parkingRecordInfoService.updateParkingRecordInfo(recordInfo);
             System.out.println("更新停车记录表成功========> " + i1);
 
-            return "支付成功，祝您一路平安！";
+            return "success";
 
         } else {
-            return "支付金额错误，请重新扫码支付！";
+            return "false";
         }
 
     }

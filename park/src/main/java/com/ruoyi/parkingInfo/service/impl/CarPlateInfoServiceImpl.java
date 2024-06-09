@@ -85,4 +85,13 @@ public class CarPlateInfoServiceImpl implements ICarPlateInfoService {
     public int deleteCarPlateInfoById(Long id) {
         return carPlateInfoMapper.deleteCarPlateInfoById(id);
     }
+
+    /**
+     * 通过手机号查询车牌
+     *
+     * @return 车牌列表
+     */
+    public List<CarPlateInfo> selectCarPlateInfoByPhone(String phone) {
+        return carPlateInfoMapper.selectCarPlateInfoByPhone(phone);
+    }
 }

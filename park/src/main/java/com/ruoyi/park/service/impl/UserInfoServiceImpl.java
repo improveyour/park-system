@@ -85,4 +85,15 @@ public class UserInfoServiceImpl implements IUserInfoService {
     public int deleteUserInfoById(Long id) {
         return userInfoMapper.deleteUserInfoById(id);
     }
+
+    /**
+     * 根据电话号码查询用户信息
+     *
+     * @param phone
+     * @return
+     */
+    @Override
+    public UserInfo selectUserInfoByPhone(String phone) {
+        return userInfoMapper.selectUserInfoByPhone(phone);
+    }
 }

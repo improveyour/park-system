@@ -58,4 +58,12 @@ public interface IUserInfoService {
      * @return 结果
      */
     public int deleteUserInfoById(Long id);
+
+    /**
+     * 根据电话号码查询用户信息
+     *
+     * @param phone
+     * @return
+     */
+    public UserInfo selectUserInfoByPhone(String phone);
 }

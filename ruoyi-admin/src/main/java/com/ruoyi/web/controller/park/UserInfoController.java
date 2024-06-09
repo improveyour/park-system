@@ -112,4 +112,6 @@ public class UserInfoController extends BaseController {
     public AjaxResult remove(String ids) {
         return toAjax(userInfoService.deleteUserInfoByIds(ids));
     }
+
+
 }

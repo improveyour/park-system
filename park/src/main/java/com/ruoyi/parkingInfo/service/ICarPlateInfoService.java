@@ -20,6 +20,13 @@ public interface ICarPlateInfoService {
     public CarPlateInfo selectCarPlateInfoById(Long id);
 
     /**
+     * 通过手机号查询车牌
+     *
+     * @return 车牌列表
+     */
+    public List<CarPlateInfo> selectCarPlateInfoByPhone(String phone);
+
+    /**
      * 查询车牌列表
      *
      * @param carPlateInfo 车牌
