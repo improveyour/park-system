@@ -1,8 +1,8 @@
 ## 项目介绍
 
-本项目是基于前后端不分离的若依框架进行了二次开发，同时也是我的毕业设计的一部分，关于若依框架部分的项目讲解请移步至（https://github.com/yangzongzhuan/RuoYi-fast）。
+本项目是基于前后端不分离的若依框架进行了二次开发，同时也是我的毕业设计的一部分，关于若依框架部分的项目讲解请移步至（ https://github.com/yangzongzhuan/RuoYi-fast ）
 
-项目用到的识别模型（https://github.com/improveyour/Plate_detection_recognition）
+项目用到的识别模型（ https://github.com/improveyour/Plate_detection_recognition ）
 
 小程序端也在这个项目中（等待完善）
 
@@ -69,13 +69,12 @@ plate_img 文件夹，如下图：
 4.修改 **ruoyi-admin/src/main/java/com/ruoyi/web/controller/park/ParkingController.java** 中第 270
 行中的绝对路径，该路径为支付二维码生成的路径，可以自定义存放位置
 
-4.启动前检查自己的8080端口和8000端口是否被占用，如果被占用了，可以修改*
-*park/src/main/java/com/ruoyi/plateRec/service/impl/FileService.java**  中的第 90 和 165 行的 url 地址的端口，同时还要修改识别模型中的
+4.启动前检查自己的8080端口和8000端口是否被占用，如果被占用了，可以修改 **park/src/main/java/com/ruoyi/plateRec/service/impl/FileService.java** 中的第 90 和 165 行的 url 地址的端口，同时还要修改识别模型中的
 **java_demo_plus.py** 文件中第 303 行的端口
 
 5.执行模型中的 **java_demo_plus.py** 文件
 
-6.执行 **RuoYiApplication.java** ，该文件的路径为：ruoyi-admin/src/main/java/com/ruoyi/RuoYiApplication.java
+6.执行 **RuoYiApplication.java** ，该文件的路径为：**ruoyi-admin/src/main/java/com/ruoyi/RuoYiApplication.java**
 
 （如需要该毕设配套的毕业论文，可联系QQ有偿获取：1677830702）
 
