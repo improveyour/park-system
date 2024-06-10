@@ -1,0 +1,42 @@
+<view class="top-bg"></view>
+<view class="box">
+  <!-- 头像 -->
+  <view class="head-box">
+    <button open-type="chooseAvatar" class="avatar" bindchooseavatar="chooseAvatar">
+      <image class="head-img" src="/images/shasha.jpg" mode="widthFix"></image>
+    </button>
+    <view class="tip"></view>
+  </view>
+  <!-- 第一部分列表 -->
+  <view>
+    <view class="row">
+      <view class="left">
+        <icon class="icon-small" type="success" size="16"></icon>
+        <text class="text">用户名：</text>
+        <input class="text" bindinput="inputUsername" value="{{username}}"> </input>
+      </view>
+    </view>
+
+    <view class="row" style="width: 100%;">
+      <view class="left">
+        <icon class="icon-small" type="success" size="16"></icon>
+        <text class="text">密码：</text>
+        <input class="text" bindinput="inputPassword" value="{{password}}"> </input>
+      </view>
+    </view>
+
+    <view class="row" style="width: 100%;">
+      <view class="left">
+        <icon class="icon-small" type="success" size="16"></icon>
+        <text class="text">手机号码：</text>
+        <input class="text" bindinput="inputPhone" value="{{phone}}"> </input>
+      </view>
+    </view>
+
+
+
+  </view>
+</view>
+<view class="footer">
+  <button class="buttonCss" bindtap="saveMessage">保存</button>
+</view>

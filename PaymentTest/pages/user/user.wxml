@@ -1,0 +1,52 @@
+<view class="top-bg"></view>
+<view class="box">
+  <!-- 头像 -->
+  <view class="head-box">
+    <button open-type="chooseAvatar" class="avatar" bindchooseavatar="chooseAvatar">
+      <image class="head-img" src="{{login.avatar}}" mode="widthFix"></image>
+    </button>
+    <view class="tip">{{login.show?'欢迎使用':'当前未登录，请登录！'}}</view>
+  </view>
+  <!-- 第一部分列表 -->
+  <view>
+    <button class="row" style="width: 100%;" bindtap="basicClick">
+      <view class="left">
+        <icon class="icon-small" type="success" size="16"></icon>
+        <text class="text">修改信息</text>
+      </view>
+      <view class="right">》</view>
+    </button>
+    <button class="row" style="width: 100%;border-bottom: none;" bindtap="searchInfo">
+      <view class="left">
+        <icon class="icon-small" type="success" size="16"></icon>
+        <text class="text">缴费记录</text>
+      </view>
+      <view class="right">》</view>
+    </button>
+    <button class="row" style="width: 100%;border-bottom: none;" bindtap="changePlate">
+      <view class="left">
+        <icon class="icon-small" type="success" size="16"></icon>
+        <text class="text">绑定车牌</text>
+      </view>
+      <view class="right">》</view>
+    </button>
+  </view>
+</view>
+<!-- 第三部分列表 -->
+<view class="end">
+  <button wx:if="{{login.line}}" bindtap="exitClick" class="row" style="width: 100%;border-bottom: none;">
+    <view class="left">
+      <icon class="icon-small" type="success" size="16"></icon>
+      <text class="text">退出登录</text>
+    </view>
+  </button>
+  <button class="row" open-type="chooseAvatar" bindchooseavatar="chooseAvatar" style="width: 100%;border-bottom: none;" wx:else>
+    <view class="left">
+      <icon class="icon-small" type="success" size="16"></icon>
+      <text class="text">立即登录</text>
+    </view>
+  </button>
+</view>
+<view class="footer">
+  <text>©个人中心</text>
+</view>

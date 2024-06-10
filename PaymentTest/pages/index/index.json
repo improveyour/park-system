@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#eee",
+  "navigationBarTitleText": "微信支付"
+}

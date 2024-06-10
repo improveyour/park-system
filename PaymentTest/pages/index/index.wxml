@@ -1,0 +1,11 @@
+<!--pages/Main/Main.wxml-->
+<!-- <text>请点击按钮扫描二维码</text> -->
+
+<view class='imagebox'>
+  <image class="imageCss" src="/images/shasha.jpg"/>
+</view>
+
+<button class="buttonCss" bindtap="scanCodeClick">扫码支付</button>
+
+
+

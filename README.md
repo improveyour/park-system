@@ -1,38 +1,36 @@
-<p align="center">
-	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-dd77653d7c9f197dd9d93684f3c8dcfbab6.png">
-</p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">RuoYi v4.7.8</h1>
-<h4 align="center">基于SpringBoot开发的轻量级Java快速开发框架</h4>
-<p align="center">
-	<a href="https://gitee.com/y_project/RuoYi/stargazers"><img src="https://gitee.com/y_project/RuoYi/badge/star.svg?theme=gvp"></a>
-	<a href="https://gitee.com/y_project/RuoYi"><img src="https://img.shields.io/badge/RuoYi-v4.7.8-brightgreen.svg"></a>
-	<a href="https://gitee.com/y_project/RuoYi/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
-</p>
+## 项目介绍
 
-## 平台简介
+本项目是基于前后端不分离的若依框架进行了二次开发，同时也是我的毕业设计的一部分，关于若依框架部分的项目讲解请移步至（https://github.com/yangzongzhuan/RuoYi-fast）。
 
-一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适的。于是利用空闲休息时间开始自己写了一套后台系统。如此有了若依。她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
+项目用到的识别模型（https://github.com/improveyour/Plate_detection_recognition）
 
-性别男，若依是给女儿取的名字（寓意：你若不离不弃，我必生死相依）
+小程序端也在这个项目中（等待完善）
 
-若依是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
+停车场管理系统主要分为停车场管理系统web端和停车场管理系统微信小程序端。系统的web端主要面向拥有管理员权限的用户，可完成用户管理、车位管理、收费标准制定等操作；微信小程序端主要面向普通用户，可以查询自己的缴费记录，修改自己的个人信息。其中，车辆入库和车辆出库模块是本系统的重要组成部分，可以对进出停车场的车辆进行管理，系统整体框架如下：
 
-* 前后端分离版本，请移步[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)，微服务版本，请移步[RuoYi-Cloud](https://gitee.com/y_project/RuoYi-Cloud)
-* 感谢 [hplus](https://gitee.com/hplus_admin/hplus) 后台主题 UI 框架。
-* 阿里云折扣场：[点我进入](http://aly.ruoyi.vip)，腾讯云秒杀场：[点我进入](http://txy.ruoyi.vip)&nbsp;&nbsp;
-* 阿里云优惠券：[点我领取](https://www.aliyun.com/minisite/goods?userCode=brki8iof&share_source=copy_link)，腾讯云优惠券：[点我领取](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console)&nbsp;&nbsp;
+![picture01](assets/picture01.png)
+
+数据库的ER图如下，具体的表结构详见项目中的 sql 文件夹中的 park_sql.sql 文件。
+
+![picture02](assets/picture02.png)
+
+项目结构说明如下图：
+
+![QQ截图20240610154712](assets/QQ截图20240610154712.png)
+
+![QQ截图20240610154856](assets/QQ截图20240610154856.png)
 
 ## 内置功能
 
-1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
-2.  部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
-3.  岗位管理：配置系统用户所属担任职务。
-4.  菜单管理：配置系统菜单，操作权限，按钮权限标识等。
-5.  角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
-6.  字典管理：对系统中经常使用的一些较为固定的数据进行维护。
-7.  参数管理：对系统动态配置常用参数。
-8.  通知公告：系统通知公告信息发布维护。
-9.  操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。
+1. 用户管理：用户是系统操作者，该功能主要完成系统用户配置。
+2. 部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
+3. 岗位管理：配置系统用户所属担任职务。
+4. 菜单管理：配置系统菜单，操作权限，按钮权限标识等。
+5. 角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
+6. 字典管理：对系统中经常使用的一些较为固定的数据进行维护。
+7. 参数管理：对系统动态配置常用参数。
+8. 通知公告：系统通知公告信息发布维护。
+9. 操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。
 10. 登录日志：系统登录日志记录查询包含登录异常。
 11. 在线用户：当前系统中活跃用户状态监控。
 12. 定时任务：在线（添加、修改、删除)任务调度包含执行结果日志。
@@ -43,60 +41,79 @@
 17. 在线构建器：拖动表单元素生成相应的HTML代码。
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
-## 在线体验
+------
 
-- admin/admin123  
-- 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
+以上为若依框架自带的功能，以下为系统新增的功能：
 
-演示地址：http://ruoyi.vip  
-文档地址：http://doc.ruoyi.vip
+1.车辆入库模块：上传车辆照片并调用识别模型，识别成功后返回识别结果
+
+2.车辆出库模快：上传车辆照片并调用识别模型，识别成功后返回识别结果，根据识别结果进行计费
+
+3.收费标准制定模块：允许管理员制定收费标准
+
+4.出库缴费模块：用户可以在微信小程序扫描生成的支付二维码进行缴费
+
+## 快速部署
+
+1.拉取项目到本地并进行解压
+
+2.修改项目的maven为自己的maven
+
+3.修改 **park/src/main/java/com/ruoyi/plateRec/service/impl/FileService.java**  中第 24 行的绝对路径为项目文件夹中的
+plate_img 文件夹，如下图：
+
+![picture03](assets/picture03.png)
+
+仅需要修改红色框中的路径即可
+
+4.修改 **ruoyi-admin/src/main/java/com/ruoyi/web/controller/park/ParkingController.java** 中第 270
+行中的绝对路径，该路径为支付二维码生成的路径，可以自定义存放位置
+
+4.启动前检查自己的8080端口和8000端口是否被占用，如果被占用了，可以修改*
+*park/src/main/java/com/ruoyi/plateRec/service/impl/FileService.java**  中的第 90 和 165 行的 url 地址的端口，同时还要修改识别模型中的
+**java_demo_plus.py** 文件中第 303 行的端口
+
+5.执行模型中的 **java_demo_plus.py** 文件
+
+6.执行 **RuoYiApplication.java** ，该文件的路径为：ruoyi-admin/src/main/java/com/ruoyi/RuoYiApplication.java
+
+（如需要该毕设配套的毕业论文，可联系QQ有偿获取：1677830702）
 
 ## 演示图
 
-<table>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-42e518aa72a24d228427a1261cb3679f395.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-7f20dd0edba25e5187c5c4dd3ec7d3d9797.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-2dae3d87f6a8ca05057db059cd9a411d51d.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-ea4d98423471e55fba784694e45d12bd4bb.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-7f6c6e9f5873efca09bd2870ee8468b8fce.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-c708b65f2c382a03f69fe1efa8d341e6cff.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-9ab586c47dd5c7b92bca0d727962c90e3b8.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-ef954122a2080e02013112db21754b955c6.png"/></td>
-    </tr>	 
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-088edb4d531e122415a1e2342bccb1a9691.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-f886fe19bd820c0efae82f680223cac196c.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-c7a2eb71fa65d6e660294b4bccca613d638.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-e60137fb0787defe613bd83331dc4755a70.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-7c51c1b5758f0a0f92ed3c60469b7526f9f.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-15181aed45bb2461aa97b594cbf2f86ea5f.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-83326ad52ea63f67233d126226738054d98.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-3bd6d31e913b70df00107db51d64ef81df7.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-70a2225836bc82042a6785edf6299e2586a.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-0184d6ab01fdc6667a14327fcaf8b46345d.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-64d8086dc2c02c8f71170290482f7640098.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-5e4daac0bb59612c5038448acbcef235e3a.png"/></td>
-    </tr>
-</table>
+用户登录：
 
+![图片3](assets/图片3-1718004269939.png)
 
-## 若依交流群
+用户管理：
 
-QQ群： [![加入QQ群](https://img.shields.io/badge/已满-1389287-blue.svg)](https://jq.qq.com/?_wv=1027&k=5HBAaYN)  [![加入QQ群](https://img.shields.io/badge/已满-1679294-blue.svg)](https://jq.qq.com/?_wv=1027&k=5cHeRVW)  [![加入QQ群](https://img.shields.io/badge/已满-1529866-blue.svg)](https://jq.qq.com/?_wv=1027&k=53R0L5Z)  [![加入QQ群](https://img.shields.io/badge/已满-1772718-blue.svg)](https://jq.qq.com/?_wv=1027&k=5g75dCU)  [![加入QQ群](https://img.shields.io/badge/已满-1366522-blue.svg)](https://jq.qq.com/?_wv=1027&k=58cPoHA)  [![加入QQ群](https://img.shields.io/badge/已满-1382251-blue.svg)](https://jq.qq.com/?_wv=1027&k=5Ofd4Pb)  [![加入QQ群](https://img.shields.io/badge/已满-1145125-blue.svg)](https://jq.qq.com/?_wv=1027&k=5yugASz)  [![加入QQ群](https://img.shields.io/badge/已满-86752435-blue.svg)](https://jq.qq.com/?_wv=1027&k=5Rf3d2P)  [![加入QQ群](https://img.shields.io/badge/已满-134072510-blue.svg)](https://jq.qq.com/?_wv=1027&k=5ZIjaeP)  [![加入QQ群](https://img.shields.io/badge/已满-210336300-blue.svg)](https://jq.qq.com/?_wv=1027&k=5CJw1jY)  [![加入QQ群](https://img.shields.io/badge/已满-339522636-blue.svg)](https://jq.qq.com/?_wv=1027&k=5omzbKc)  [![加入QQ群](https://img.shields.io/badge/已满-130035985-blue.svg)](https://jq.qq.com/?_wv=1027&k=qPIKBb7s)  [![加入QQ群](https://img.shields.io/badge/已满-143151071-blue.svg)](https://jq.qq.com/?_wv=1027&k=4NsjKbtU)  [![加入QQ群](https://img.shields.io/badge/已满-158781320-blue.svg)](https://jq.qq.com/?_wv=1027&k=VD2pkz2G)  [![加入QQ群](https://img.shields.io/badge/已满-201531282-blue.svg)](https://jq.qq.com/?_wv=1027&k=HlshFwkJ)  [![加入QQ群](https://img.shields.io/badge/已满-101526938-blue.svg)](https://jq.qq.com/?_wv=1027&k=0ARRrO9V)  [![加入QQ群](https://img.shields.io/badge/已满-264355400-blue.svg)](https://jq.qq.com/?_wv=1027&k=up9k3ZXJ)  [![加入QQ群](https://img.shields.io/badge/已满-298522656-blue.svg)](https://jq.qq.com/?_wv=1027&k=540WfdEr)  [![加入QQ群](https://img.shields.io/badge/已满-139845794-blue.svg)](https://jq.qq.com/?_wv=1027&k=ss91fC4t)  [![加入QQ群](https://img.shields.io/badge/已满-185760789-blue.svg)](https://jq.qq.com/?_wv=1027&k=Cqd66IKe) [![加入QQ群](https://img.shields.io/badge/已满-175104288-blue.svg)](https://jq.qq.com/?_wv=1027&k=7FplYUnR) [![加入QQ群](https://img.shields.io/badge/174942938-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=lqMHu_5Fskm7H2S1vNAQTtzAUokVydwc&authKey=ptw0Fpch5pbNocML3CIJKKqZBaq2DI7cusKuzIgfMNiY3t9Pvd9hP%2BA8WYx3yaY1&noverify=0&group_code=174942938)
+![图片4](assets/图片4.png)
+
+用户新增：
+
+![图片5](assets/图片5.png)
+
+车辆入库：
+
+![图片6](assets/图片6-1718004389414.png)
+
+车辆出库（不需要付款）：
+
+![图片7](assets/图片7.png)
+
+车辆出库（需要付款）：
+
+![图片8](assets/图片8-1718004412744.png)
+
+收费标准制定：
+
+![图片9](assets/图片9.png)
+
+## 注意事项
+
+1.项目中的 ECharts 图并未调用数据库，属于未完成版，后期会改（下次一定）
+
+2.若依框架自带的代码生成器特别好用，可以搜一下相关的使用教程
+
+3.小程序端代码也在该项目目录中，除了支付功能，其余功能均为完善好，有时间的话会对其进行更新（以后一定），小程序向后端发送 GET
+请求时，IP地址已经被写死了，需要使用 ipconfig 来查询并修改为本机的 IP 地址

@@ -1,0 +1,45 @@
+<view class="top-bg"></view>
+<view class="box">
+  <!-- 头像 -->
+  <view class="head-box">
+    <button open-type="chooseAvatar" class="avatar" bindchooseavatar="chooseAvatar">
+      <image class="head-img" src="/images/shasha.jpg" mode="widthFix"></image>
+    </button>
+    <view class="tip"></view>
+  </view>
+  <!-- 第一部分列表 -->
+  <view>
+    <view>
+      <scroll-view class="table" scroll-x="true">
+      <!-- 表头(即第一行) -->
+      <view class="tr">
+          <view class="th_1">车牌号</view>
+          <view class="th_2">缴费时间</view>
+          <view class="th_3">金额</view>
+      </view>
+      <!-- 表格第二行 -->
+      <view class="tr">
+          <view class="td_1">粤A636YK</view>
+          <view class="td_2">2024-05-10 01:00:17</view>
+          <view class="td_3">0 元</view>
+      </view>
+
+      <!-- 表格第三行 -->
+      <view class="tr">
+          <view class="td_1">粤A636YK</view>
+          <view class="td_2">2024-05-10 12:33:55</view>
+          <view class="td_3">20 元</view>
+      </view>
+      
+      <!-- 表格第四行 -->
+      <view class="tr">
+          <view class="td_1">粤A636YK</view>
+          <view class="td_2">2024-06-06 13:57:08</view>
+          <view class="td_3">0 元</view>
+      </view>
+      </scroll-view>
+    </view>
+
+  </view>
+</view>
+
